@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
 export class JokesService {
   constructor(private readonly httpService: HttpService) {}
 
-  async getRandomJoke(category?: string): Promise<any> {
+  async getRandomJoke(category?: string, name?: string): Promise<any> {
     let url = 'https://api.chucknorris.io/jokes/random';
 
     if(category) {
@@ -14,6 +14,12 @@ export class JokesService {
     }
     
     const { data } = await firstValueFrom(this.httpService.get(url));
+
+    if(name) {
+      data.value = data.value.replace(/Chuck Norris/gi, name);
+      data.value = data.value.replace(/Chuck/gi, name);
+    }
+
     return data;
   }
 
