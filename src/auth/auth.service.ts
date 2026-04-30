@@ -7,8 +7,13 @@ export class AuthService {
 
   async signIn(email: string, password: string): Promise<Any> {
     const user = await this.usersService.findOne(email);
-    if(user?.password !== password) {
-      throw new UnauthorizedException();
+
+    if(!user) { throw new UnauthorizedException('User not found'); }
+
+    const isPwdMatch = await bcrypt.compare(password, user.password);
+
+    if(!isPwdMatch) {
+      throw new UnauthorizedException('Invalid credentials');
     }
 
     const { password, ...result } = user; 
