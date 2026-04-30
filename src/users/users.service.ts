@@ -21,4 +21,15 @@ export class UsersService {
   async findOne(email: string): Promise<User | undefined>{
     return this.users.find(user => user.email === email);
   }
+
+  async create(email: string, password: string): Promise<User> {
+    const hashedPwd = await bcrypt.hash(password, 10);
+    const newUser = {
+      userId: Date.now(),
+      email,
+      password: hashedPwd
+    };
+    this.users.push(newUser);
+    return newUser;
+  }
 }
