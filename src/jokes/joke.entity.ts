@@ -12,9 +12,6 @@ export class Joke {
   @Column()
   value: string;
 
-  @Column({nullable: true})
-  category: string;
-
   @ManyToOne(() => User, (user) => user.jokes)
   user: User;
 }
