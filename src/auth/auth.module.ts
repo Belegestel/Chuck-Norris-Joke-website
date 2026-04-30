@@ -9,7 +9,7 @@ import { JwtModule } from '@nestjs/jwt';
     UsersModule,
     JwtModule.register({
       global: true,
-      secret: 'this-is-a-secret-and-should-be-in-env',
+      secret: 'this-is-a-secret-and-should-be-in-env', // Also in auth.guard.ts
       signOptions: { expiresIn: '1h' },
     })
   ],
