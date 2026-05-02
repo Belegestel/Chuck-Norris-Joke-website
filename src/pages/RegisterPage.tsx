@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export const LoginPage = () => {
+export const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -15,14 +15,14 @@ export const LoginPage = () => {
   const handleLogin = async () => {
     setError(null);
     try {
-      const resp = await axios.post('http://localhost:3000/auth/login', { email, password })
+      const resp = await axios.post('http://localhost:3000/auth/signup', { email, password })
       if(resp.data.access_token) {
         localStorage.setItem('token', resp.data.access_token);
       }
-      navigate('/jokes/random');
+      navigate('/login');
     } catch (err: any) {
       if(err.response) {
-        setError(err.response.data.message || ' invalid credentials.');
+        setError('Registration failed, ' || err.response.data.message);
       }
       else {
         setError('Cannot connect to server.');
@@ -117,7 +117,7 @@ export const LoginPage = () => {
             }
           }}
         >
-          LOG IN
+          REGISTER
         </Button>
 
         {error && (
@@ -127,13 +127,13 @@ export const LoginPage = () => {
         )}
 
         <Typography variant='body1'>
-          Don't have an account?{' '}
+          Already have an account?{' '}
           <Link 
             component={RouterLink}
-            to="/register"
+            to="/login"
             sx={{ fontWeight: 700, color: 'text.primary', textDecoration: 'none' }}
           >
-            Sign up here.
+            Log in here.
           </Link>
         </Typography>
 
