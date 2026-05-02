@@ -1,10 +1,12 @@
-//import { useState } from 'react'
-//import reactLogo from './assets/react.svg'
-//import viteLogo from './assets/vite.svg'
-//import heroImg from './assets/hero.png'
-//import './App.css'
-import { createTheme, ThemeProvider, CssBaseLine, Box } from '@mui/material';
+import { BrowserRouter } from 'react-router-dom';
+import { createTheme, ThemeProvider, CssBaseline, Box } from '@mui/material';
+import '@fontsource/josefin-slab/400.css';
+import '@fontsource/josefin-slab/400-italic.css';
+import '@fontsource/josefin-slab/700.css';
+import '@fontsource/josefin-slab/700-italic.css';
 import '@fontsource/josefin-slab';
+import { useState } from 'react';
+import { LoginPage } from './pages/LoginPage.tsx';
 
 const theme = createTheme({
   palette: {
@@ -20,6 +22,10 @@ const theme = createTheme({
     },
     text: {
       primary: '#2C2C2C'
+    },
+    action: {
+      disabledBackground: '#AAAAAA',
+      disabled: '#FDFDFD'
     }
   },
   typography: {
@@ -37,23 +43,34 @@ const theme = createTheme({
   }
 });
 
+declare module '@mui/materials/styles' {
+  interface Palette {
+    disabled: Palette['primary'];
+  }
+  interface PaletteOptions {
+    disabled?: PaletteOptions['primary'];
+  }
+}
+
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Box sx={{
-        minHeight: '100vh',
-        bgcolor: 'background.default',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        p: 3
-      }}>
-        <LoginPage />
-      </Box>
-    </ThemeProvider>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Box sx={{
+          minHeight: '100vh',
+          bgcolor: 'background.default',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          p: 3
+        }}>
+          <LoginPage />
+        </Box>
+      </ThemeProvider>
+    </BrowserRouter>
   )
 }
 
