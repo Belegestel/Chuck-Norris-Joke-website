@@ -32,18 +32,29 @@ const theme = createTheme({
     fontFamily: '"Josefin Slab", serif',
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        '#root': {
+          border: 'none !important',
+          outline: 'none !important',
+          boxShadow: 'none !important',
+        },
+      },
+    },
     MuiPaper: {
       styleOverrides: {
         root: {
           borderRadius: 20,
-          backgroundColor: '#FDFDFA'
+          backgroundColor: '#FDFDFA',
+          border: 'none',
+          boxShadow: '-20px 20px 10px rgba(0, 0, 0, 0.15)'
         }
       }
     }
   }
 });
 
-declare module '@mui/materials/styles' {
+declare module '@mui/material/styles' {
   interface Palette {
     disabled: Palette['primary'];
   }
@@ -65,7 +76,7 @@ function App() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          p: 3
+          p: 3,
         }}>
           <LoginPage />
         </Box>

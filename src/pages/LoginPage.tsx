@@ -18,7 +18,6 @@ export const LoginPage = () => {
         textAlign: 'center',
         border: '1px solid',
         borderColor: 'background.paper',
-        boxShadow: '-15px 15px 0px rgba(0, 0, 0, 0.15)',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
