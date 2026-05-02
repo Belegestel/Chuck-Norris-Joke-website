@@ -1,12 +1,36 @@
-import { Box, Paper, TextField, Button, Typography, Link, Stack } from '@mui/material';
+import { Box, Paper, TextField, Button, Typography, Link, Stack, Alert } from '@mui/material';
 import { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
+  
 
   const isFormValid = email.length > 0 && password.length > 0;
+
+  const handleLogin = async () => {
+    setError(null);
+    try {
+      const resp = await axios.post('http://localhost:3000/auth/login', { email, password })
+      console.log(resp);
+      if(resp.data.access_token) {
+        localStorage.setItem('token', resp.data.access_token);
+      }
+      navigate('/jokes/random');
+    } catch (err: any) {
+      if(err.response) {
+        setError(err.response.data.message || ' invalid credentials.');
+      }
+      else {
+        setError('Cannot connect to server.');
+        console.log(err);
+      }
+    }
+  }
 
   return (
     <Paper
@@ -82,6 +106,8 @@ export const LoginPage = () => {
         <Button
           variant='contained'
           disabled={ !isFormValid }
+          type='submit'
+          onClick={handleLogin}
           sx={{
             py: 1.5,
             fontSize: '1rem',
@@ -94,6 +120,12 @@ export const LoginPage = () => {
         >
           LOG IN
         </Button>
+
+        {error && (
+          <Alert severity='error' sx={{ mb: 2 }}>
+            { error }
+          </Alert>
+        )}
 
         <Typography variant='body1'>
           Don't have an account?{' '}
