@@ -1,0 +1,87 @@
+import { Box, Paper, Typography, Button, Stack } from '@mui/material';
+import { useNavigate, useLocation } from 'react-router-dom';
+
+export const Sidebar = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
+  const isActive = (path: string) => location.pathname === path;
+
+  const sidebarButtonStyle = (path: string) => ({
+    color: 'text.secondary',
+    fontSize: '1.1rem',
+    justifyContent: 'flex-start',
+    px: 0,
+    textTransform: 'none',
+    fontWeight: isActive(path) ? 700 : 400,
+    textDecoration: isActive(path) ? 'underline' : 'none',
+    textUnderlineOffset: '4px'
+  });
+
+  return (
+    <Paper sx={{ 
+      width: '25%', bgcolor: 'background.gray', p: 4, borderRadius: 5,
+      display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+    }}>
+      <Box sx={{ width: '100%' }}>
+        <Box 
+          component='img' 
+          src='/src/assets/joke-svgrepo-com.svg' 
+          sx={{ width: 60, mb: 4, filter: 'brightness(0) invert(1)' }} 
+        />
+        
+        <Stack spacing={1} sx={{ width: '100%' }}>
+          <Button 
+            fullWidth 
+            onClick={() => navigate('/random')}
+            sx={sidebarButtonStyle('/jokes/random')}
+          >
+            RANDOM JOKE
+          </Button>
+          
+          <Button 
+            fullWidth 
+            onClick={() => navigate('/my-jokes')}
+            sx={sidebarButtonStyle('/my-jokes')}
+          >
+            MY JOKES
+          </Button>
+          
+          <Button 
+            fullWidth 
+            onClick={() => navigate('/add-joke')}
+            sx={sidebarButtonStyle('/add-joke')}
+          >
+            ADD JOKE
+          </Button>
+        </Stack>
+      </Box>
+
+      <Box sx={{ width: '100%' }}>
+        <Box sx={{ mb: 2 }}>
+          <Button 
+            onClick={handleLogout} 
+            fullWidth
+            sx={{ 
+              color: 'text.secondary', 
+              fontSize: '1.1rem',
+              justifyContent: 'flex-start',
+              px: 0,
+              fontWeight: 700 
+            }}
+          >
+            LOG OUT
+          </Button>
+        </Box>
+        <Typography variant="caption" display="block" sx={{ color: 'text.secondary' }}>
+          made with Chuck by Chuck - 2026
+        </Typography>
+      </Box>
+    </Paper>
+  );
+};
