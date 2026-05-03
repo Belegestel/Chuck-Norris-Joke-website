@@ -1,6 +1,6 @@
 import { Box, Paper, Typography, Button, TextField, Stack, Alert } from '@mui/material';
 import { useState } from 'react';
-import axios from 'axios';
+import axios from '../services/axios.ts';
 import { Sidebar } from '../components/sidebar.tsx';
 
 export const AddJoke = () => {

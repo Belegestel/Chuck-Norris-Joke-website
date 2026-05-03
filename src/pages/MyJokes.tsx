@@ -1,6 +1,6 @@
 import { Box, Paper, Typography, Stack, IconButton } from '@mui/material';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../services/axios.ts';
 import { Sidebar } from '../components/sidebar.tsx';
 
 interface SavedJoke {

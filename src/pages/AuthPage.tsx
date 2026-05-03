@@ -1,7 +1,8 @@
 import { Box, Paper, TextField, Button, Typography, Link, Stack, Alert } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../services/axios.ts';
+
 
 interface AuthPageProps {
   login: boolean;
@@ -13,7 +14,7 @@ export const AuthPage = ({ login }: AuthPageProps) => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
-  const isFormValid = email.length > 0 && password.length > 0;
+  const isFormValid = email.length > 0 && password.length > 0 && email.includes('@');
 
   useEffect(() => {
     setEmail('');

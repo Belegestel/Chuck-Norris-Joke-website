@@ -1,7 +1,7 @@
 import { Box, Paper, Typography, Button, TextField, Stack, MenuItem, Select, FormControl, InputLabel, Alert } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../services/axios.ts';
 import { Sidebar } from '../components/sidebar.tsx';
 
 export const RandomJoke = () => {
