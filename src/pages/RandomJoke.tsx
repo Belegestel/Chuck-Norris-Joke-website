@@ -69,14 +69,6 @@ export const RandomJoke = () => {
     navigate('/login');
   };
 
-  const sidebarButtonStyle = {
-    color: 'text.secondary',
-    fontSize: '1.1rem',
-    justifyContent: 'flex-start',
-    px: 0,
-    textTransform: 'none',
-  };
-
   return (
     <Stack direction="row" spacing={2} sx={{ width: '100%', maxWidth: 1200, height: '65vh' }}>
       <Sidebar />
