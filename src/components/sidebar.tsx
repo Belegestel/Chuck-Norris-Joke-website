@@ -58,8 +58,8 @@ export const Sidebar = () => {
           
           <Button 
             fullWidth 
-            onClick={() => navigate('/add-joke')}
-            sx={sidebarButtonStyle('/add-joke')}
+            onClick={() => navigate('/jokes/add')}
+            sx={sidebarButtonStyle('/jokes/add')}
           >
             ADD JOKE
           </Button>

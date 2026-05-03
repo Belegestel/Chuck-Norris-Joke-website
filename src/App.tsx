@@ -11,6 +11,7 @@ import { LoginPage } from './pages/LoginPage.tsx';
 import { RegisterPage } from './pages/RegisterPage.tsx';
 import { RandomJoke } from './pages/RandomJoke.tsx';
 import { MyJokes } from './pages/MyJokes.tsx';
+import { AddJoke } from './pages/AddJoke.tsx';
 
 const theme = createTheme({
   palette: {
@@ -91,6 +92,7 @@ function App() {
             <Route path='/jokes' element={ <Navigate to='/jokes/random' /> } />
             <Route path='/jokes/random' element={ <RandomJoke /> } />
             <Route path='/jokes/my' element={ <MyJokes /> } />
+            <Route path='/jokes/add' element={ <AddJoke /> } />
           </Routes>
         </Box>
       </ThemeProvider>
