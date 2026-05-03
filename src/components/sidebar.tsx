@@ -14,19 +14,23 @@ export const Sidebar = () => {
 
   const sidebarButtonStyle = (path: string) => ({
     color: 'text.secondary',
-    fontSize: '1.1rem',
+    fontSize: '1.5rem',
     justifyContent: 'flex-start',
     px: 0,
     textTransform: 'none',
     fontWeight: isActive(path) ? 700 : 400,
     textDecoration: isActive(path) ? 'underline' : 'none',
-    textUnderlineOffset: '4px'
+    textUnderlineOffset: '4px',
+    '&:hover': {
+        backgroundColor: 'transparent'
+    },
   });
 
   return (
     <Paper sx={{ 
-      width: '25%', bgcolor: 'background.gray', p: 4, borderRadius: 5,
-      display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+      flexBasis: '25%', flexShrink: 0, flexGrow: 0, bgcolor: 'background.gray',
+      p: 4, borderRadius: 5, display: 'flex', flexDirection: 'column',
+      justifyContent: 'space-between',
     }}>
       <Box sx={{ width: '100%' }}>
         <Box 
@@ -38,7 +42,7 @@ export const Sidebar = () => {
         <Stack spacing={1} sx={{ width: '100%' }}>
           <Button 
             fullWidth 
-            onClick={() => navigate('/random')}
+            onClick={() => navigate('/jokes/random')}
             sx={sidebarButtonStyle('/jokes/random')}
           >
             RANDOM JOKE
@@ -46,8 +50,8 @@ export const Sidebar = () => {
           
           <Button 
             fullWidth 
-            onClick={() => navigate('/my-jokes')}
-            sx={sidebarButtonStyle('/my-jokes')}
+            onClick={() => navigate('/jokes/my')}
+            sx={sidebarButtonStyle('/jokes/my')}
           >
             MY JOKES
           </Button>
@@ -69,10 +73,9 @@ export const Sidebar = () => {
             fullWidth
             sx={{ 
               color: 'text.secondary', 
-              fontSize: '1.1rem',
+              fontSize: '1.5rem',
               justifyContent: 'flex-start',
               px: 0,
-              fontWeight: 700 
             }}
           >
             LOG OUT
