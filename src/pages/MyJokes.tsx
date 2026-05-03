@@ -23,7 +23,6 @@ export const MyJokes = () => {
       });
       setJokes(resp.data);
     } catch (err) {
-      alert('Failed to fetch jokes', err);
     }
   };
 
