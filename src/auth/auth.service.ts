@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
@@ -13,12 +13,12 @@ export class AuthService {
   async signIn(email: string, password: string): Promise<{ access_token: string }> {
     const user = await this.usersService.findOne(email);
 
-    if(!user) { throw new UnauthorizedException('User not found'); }
+    if(!user) { throw new ConflictException('User not found'); }
 
     const isPwdMatch = await bcrypt.compare(password, user.password);
 
     if(!isPwdMatch) {
-      throw new UnauthorizedException('Invalid credentials');
+      throw new ConflictException('Invalid credentials');
     }
 
     const payload = { sub: user.id, email: user.email };
