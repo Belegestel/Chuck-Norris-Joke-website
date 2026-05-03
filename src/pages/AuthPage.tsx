@@ -15,13 +15,6 @@ export const AuthPage = ({ login }: AuthPageProps) => {
 
   const isFormValid = email.length > 0 && password.length > 0;
 
-  const title = 'Explore \Chuck Jokes" with us!';
-  const buttonLabel = login ? 'LOG IN' : 'REGISTER';
-  const switchText = login ? "Don't have an account?" : 'Already have an account?';
-  const linkText = login ? 'Sign up here.' : 'Log in here.';
-  const linkTo = login ? '/register' : '/login';
-  const apiEndpoint = login ? '/auth/login' : '/auth/signup';
-
   useEffect(() => {
     setEmail('');
     setPassword('');
@@ -31,7 +24,7 @@ export const AuthPage = ({ login }: AuthPageProps) => {
   const handleSubmit = async () => {
     setError(null);
     try {
-      const resp = await axios.post(`http://localhost:3000${apiEndpoint}`, { email, password });
+      const resp = await axios.post(`http://localhost:3000${login ? '/auth/login' : '/auth/signup'}`, { email, password });
       
       if (resp.data.access_token) {
         localStorage.setItem('token', resp.data.access_token);
@@ -67,7 +60,7 @@ export const AuthPage = ({ login }: AuthPageProps) => {
       />
 
       <Stack spacing={3} width='100%'>
-        <Typography variant='h4' sx={{ mb: 2 }}>{title}</Typography>
+        <Typography variant='h4' sx={{ mb: 2 }}>{'Explore \Chuck Jokes" with us!'}</Typography>
 
         <TextField 
           label='E-mail'
@@ -109,24 +102,24 @@ export const AuthPage = ({ login }: AuthPageProps) => {
             }
           }}
         >
-          {buttonLabel}
+          {login ? 'LOG IN' : 'REGISTER'}
         </Button>
 
         {error && <Alert severity='error'>{error}</Alert>}
 
         <Typography variant='body1'>
-          {switchText}{' '}
+          {login ? "Don't have an account?" : 'Already have an account?'}{' '}
           <Link 
             component={RouterLink}
-            to={linkTo}
+            to={login ? '/register' : '/login'}
             sx={{ fontWeight: 700, color: 'text.primary', textDecoration: 'none' }}
           >
-            {linkText}
+            {login ? 'Sign up here.' : 'Log in here.'}
           </Link>
         </Typography>
 
         <Typography variant='body2' sx={{ color: 'primary.main', mt: 4, fontStyle: 'italic' }}>
-          "Chuck Norris can login without signing up, on any website"
+          { login ? '"Chuck Norris can login without signing up, on any website"' : '"Chuck Norris can sign up without a website, while offline"' }
         </Typography>
       </Stack>
     </Paper>
