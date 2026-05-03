@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { firstValueFrom } from 'rxjs';
+import { lastValueFrom, map } from 'rxjs';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Joke } from '../jokes/joke.entity';
+import { AxiosError } from 'axios';
 
 @Injectable()
 export class JokesService {
@@ -17,10 +18,10 @@ export class JokesService {
     let url = 'https://api.chucknorris.io/jokes/random';
 
     if(category) {
-      url += '?category=${category}';
+      url += `?category=${category}`;
     }
     
-    const { data } = await firstValueFrom(this.httpService.get(url));
+    const { data } = await lastValueFrom(this.httpService.get(url));
 
     if(name) {
       data.value = data.value.replace(/Chuck Norris/gi, name);
@@ -31,10 +32,13 @@ export class JokesService {
   }
 
   async getCategories(): Promise<string[]> {
-    const { data } = await firstValueFrom(this.httpService.get(
-      'https://api.chucknorris.io/jokes/categories'
-    ));
-    return data;
+    const request = this.httpService
+      .get<string[]>('https://api.chucknorris.io/jokes/categories')
+      .pipe(
+        map(axiosResponse => axiosResponse.data)
+      );
+    const categories = await lastValueFrom(request);
+    return categories;
   }
 
   async saveJoke(jokeText: string, userId: number): Promise<Joke>{

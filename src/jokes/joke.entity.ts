@@ -7,9 +7,6 @@ export class Joke {
   id: number;
 
   @Column()
-  jokeId: string;
-
-  @Column()
   value: string;
 
   @ManyToOne(() => User, (user) => user.jokes)
