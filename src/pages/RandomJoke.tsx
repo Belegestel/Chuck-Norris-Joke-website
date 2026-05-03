@@ -149,7 +149,7 @@ export const RandomJoke = () => {
               onClick={handleGetJoke}
               sx={{ py: 1.5, bgcolor: 'background.default', fontWeight: 700 }}
             >
-              DRAW A RANDOM CHUCK NORRIS JOKE
+              {`DRAW A RANDOM ${impersonateName.trim() ? impersonateName.toUpperCase() : 'CHUCK NORRIS'} JOKE`}
             </Button>
             <Button 
               fullWidth variant="contained" 
