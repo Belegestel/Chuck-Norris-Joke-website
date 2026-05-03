@@ -7,8 +7,6 @@ import '@fontsource/josefin-slab/700-italic.css';
 import '@fontsource/josefin-slab';
 import { useState } from 'react';
 
-import { LoginPage } from './pages/LoginPage.tsx';
-import { RegisterPage } from './pages/RegisterPage.tsx';
 import { RandomJoke } from './pages/RandomJoke.tsx';
 import { MyJokes } from './pages/MyJokes.tsx';
 import { AddJoke } from './pages/AddJoke.tsx';
