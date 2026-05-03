@@ -1,5 +1,5 @@
 import { Box, Paper, TextField, Button, Typography, Link, Stack, Alert } from '@mui/material';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -21,6 +21,12 @@ export const AuthPage = ({ login }: AuthPageProps) => {
   const linkText = login ? 'Sign up here.' : 'Log in here.';
   const linkTo = login ? '/register' : '/login';
   const apiEndpoint = login ? '/auth/login' : '/auth/signup';
+
+  useEffect(() => {
+    setEmail('');
+    setPassword('');
+    setError('');
+  }, [login]);
 
   const handleSubmit = async () => {
     setError(null);
