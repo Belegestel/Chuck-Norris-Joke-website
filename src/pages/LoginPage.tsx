@@ -15,7 +15,7 @@ export const LoginPage = () => {
   const handleLogin = async () => {
     setError(null);
     try {
-      const resp = await axios.post('http://localhost:3000/auth/login', { email, password })
+      const resp = await axios.post('http://127.0.0.1:3000/auth/login', { email, password } );
       if(resp.data.access_token) {
         localStorage.setItem('token', resp.data.access_token);
       }

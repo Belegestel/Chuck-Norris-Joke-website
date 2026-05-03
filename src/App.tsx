@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { createTheme, ThemeProvider, CssBaseline, Box } from '@mui/material';
 import '@fontsource/josefin-slab/400.css';
 import '@fontsource/josefin-slab/400-italic.css';
@@ -6,13 +6,17 @@ import '@fontsource/josefin-slab/700.css';
 import '@fontsource/josefin-slab/700-italic.css';
 import '@fontsource/josefin-slab';
 import { useState } from 'react';
+
 import { LoginPage } from './pages/LoginPage.tsx';
+import { RegisterPage } from './pages/RegisterPage.tsx';
+import { RandomJoke } from './pages/RandomJoke.tsx';
 
 const theme = createTheme({
   palette: {
     background: {
       default: '#5B64B4',
-      paper: '#FDFDFA'
+      paper: '#FDFDFA',
+      gray: '#737172'
     },
     primary: {
       main: '#E84A8F'
@@ -21,7 +25,8 @@ const theme = createTheme({
       main: '#E5B4C6'
     },
     text: {
-      primary: '#2C2C2C'
+      primary: '#2C2C2C',
+      secondary: '#FDFDFA'
     },
     action: {
       disabledBackground: '#AAAAAA',
@@ -78,7 +83,13 @@ function App() {
           justifyContent: 'center',
           p: 3,
         }}>
-          <LoginPage />
+          <Routes>
+            <Route path='/' element={ <Navigate to="/login" /> } />
+            <Route path='/login' element={ <LoginPage /> } />
+            <Route path='/register' element={ <RegisterPage /> } />
+            <Route path='/jokes' element={ <Navigate to='/jokes/random' /> } />
+            <Route path='/jokes/random' element={ <RandomJoke /> } />
+          </Routes>
         </Box>
       </ThemeProvider>
     </BrowserRouter>
