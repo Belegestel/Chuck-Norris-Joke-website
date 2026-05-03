@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { LoginPage } from './pages/LoginPage.tsx';
 import { RegisterPage } from './pages/RegisterPage.tsx';
 import { RandomJoke } from './pages/RandomJoke.tsx';
+import { MyJokes } from './pages/MyJokes.tsx';
 
 const theme = createTheme({
   palette: {
@@ -89,6 +90,7 @@ function App() {
             <Route path='/register' element={ <RegisterPage /> } />
             <Route path='/jokes' element={ <Navigate to='/jokes/random' /> } />
             <Route path='/jokes/random' element={ <RandomJoke /> } />
+            <Route path='/jokes/my' element={ <MyJokes /> } />
           </Routes>
         </Box>
       </ThemeProvider>
